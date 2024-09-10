@@ -1,0 +1,46 @@
+running dotenv.-----------------
+1> npm i dotenv
+2> import 'dotenv/config' //server.js
+3> file .env
+4> process.env.variableName
+
+-----------------------URL for user image -----
+https://avatar-placeholder.iran.liara.run/ 
+
+-----------Using bcrypt.js---------------
+
+1> import bcrypt.js
+2> Receive password in the res.body
+3> const salt=await bcryptjs.genSalt(50)
+   const hashedPassword= await bcrypt.hash(password,salt)
+4> Pass password:hashedPassword in new userModel 
+
+
+
+---------------JWT Token----------------------------
+
+# Generate -base64 secret key in bash 
+openssl rand -base64 32
+
+Creating JWT Token 
+1> import JWT and create a function to generate webtoken
+ ref :- backend/utils/generateToken.utils.js
+
+2> pass the newUser._id and the res in function. newUser._id to generate token , and res to save the token in cookie
+
+
+---How it works---
+
+1> It takes the userId and the sercret key and generate the token
+2> It saves the token in the cookie
+3> It fetch the token from the cookie to check if the user is authenticated to perform any operation or not.
+
+
+
+
+
+
+
+
+
+
