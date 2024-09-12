@@ -4,13 +4,13 @@ const conversationSchema=new mongoose.Schema({
     participants:[
         {
             type:mongoose.Schema.Types.ObjectId,
-            ref:'User'
+            ref:'users'
         }
     ],
     messages:[
         {
             type:mongoose.Schema.Types.ObjectId,
-            ref:'Message',
+            ref:'messages',
             default:[],
         }
     ]
@@ -18,6 +18,8 @@ const conversationSchema=new mongoose.Schema({
 {timestamps:true}
 );
 
-const conversationModel=mongoose.model.conversations || ('conversations',conversationSchema)
+
+const conversationModel = mongoose.models.conversations || mongoose.model('conversations', conversationSchema);
+
 
 export default conversationModel

@@ -9,10 +9,14 @@ const messageSchema=new mongoose.Schema({
     receiverId:{
         type:String,
         required:true
+    },
+    message:{
+        type:String,
+        required:true
     }
     // created at, updated
 },{timestamps:true})
 
-const messageModel=new mongoose.model.messages || ('messages',messageSchema)
+const messageModel=mongoose.models.messages || mongoose.model('messages',messageSchema)
 
 export default messageModel
