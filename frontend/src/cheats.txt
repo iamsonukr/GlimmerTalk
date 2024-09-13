@@ -1,0 +1,103 @@
+using custom hooks --------------------------
+1> Crete a component like a normal component .
+2> Instead of JSX write the functions you want to carry out on the comonent.
+
+
+-----------------------------use context -----------------------------------------------
+
+1> Import createContext from react
+import { Children, createContext, useState } from "react";
+
+2> Create an instance of createContext
+export const AuthContext=createContext();
+
+3> Define the states and functions you want to pass in the useContext
+const [authUser,setAuthUser]=useState(JSON.parse(localStorage.getItem("chat-user")) || null)
+
+4> Create a component named InstanceNameProvider using the tags. InstanceName.provider
+  i> pass the children as prop in the component 
+  ii> pass all the states and functions as an object in the value of the tag.
+
+export const AuthContextProvider=({children})=>{
+    return <AuthContext.Provider value={{authUser,setAuthUser}} >
+        {children}
+    </AuthContext.Provider>
+}
+
+5> wrap the App compont from <AuthContextProvider> in main.JSX
+
+
+
+
+
+
+--------------------------------------------AXIOS SYNTAX----------------------------------
+
+-> In axios syntax we first pass the parameters are like
+    i> URL
+    ii> {body}
+    iii> header:{}
+
+const res=await axios.post('localhost:5000/api/user',{username:"sonukr",password:"jinga"}, header:{token:"23sdfd4xx})
+
+
+-> we can directly access the data returned by the axios without using any json.stringify. 
+const data=res.data
+
+-> While in fetch api we need json.stringify(body) while post,put operation and 
+const data = await response.json(); while get operation.
+-> we need await keyword for getting response await.
+
+-------------------------------------fetch syntex -----------------------------
+
+const res=await fetch("localhost:5000/api/user',{
+    method: 'post',
+    headers: headers,
+    body:JSON.stringify(body)
+})
+
+-> While perform delete and get operation we do not mention body and the rest of the syntax is similar.
+
+
+
+--------------------------- a.b() ----------------------
+
+res.json()
+// call the json function defined inside res.
+
+res.json 
+// it returns the reference of the function without invoking it
+
+-----------------------------------------------------async/await ------------------------------------
+
+-> Asyn keyword is use to declare that the function is asynhronous and we are eligible to use await keyword inside.
+-> await keyword is used to return the promis.What it basically does is it handover the execution to another function while making the promise that there is a promise to be returnd and will get ex
+-> Async await is use to make the function asynhronous or non blocking which is the function do not block the other function while it is 
+executing.
+-> Await keywords pauses the current function while the other function keep executing. It does'nt block the entire progran bt just the functon 
+until the promished is resolved.
+
+
+
+// In the given function the example function didnt wait for the Promise to complete 2 second. Insted it jumped to the next function by pausing the exaple until the promise is returned.
+
+async function example() {
+  console.log('Start');
+  await new Promise(resolve => setTimeout(resolve, 2000)); // Simulates a 2-second async operation
+  console.log('End');
+}
+
+console.log('Before');
+example();
+console.log('After');
+
+
+-------------------------------.then()----------------------------
+
+fetch("url").then(()=>{}).catch("").finally()
+
+
+
+
+
+

@@ -7,7 +7,7 @@ import generateTokenAndSetCookie from "../utils/generateToken.utils.js";
 const signupController = async (req, res) => {
     try {
         const { fullName, username, password, confirmPassword, gender } = req.body;
-        
+           
         // Check if passwords match
         if (password !== confirmPassword) {
             return res.status(400).json({ error: "Passwords don't match" });
@@ -16,7 +16,7 @@ const signupController = async (req, res) => {
         // Check if user already exists
         const person = await userModel.findOne({ username });
         if (person) {
-            return res.status(400).json({ error: "User already exists" });
+            return res.json({ error: "User already exists" });
         }
         
         // Hash password
@@ -45,7 +45,7 @@ const signupController = async (req, res) => {
             generateTokenAndSetCookie(newUser._id, res);
 
             // send user detail after creating it 
-            return res.status(201).json({ user: newUser });
+            return res.status(201).json({ user: newUser,message:"User Created Successfully" });
         } else {
             return res.status(400).json({ error: "Invalid user data" });
         }
