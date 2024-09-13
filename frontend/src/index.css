@@ -20,3 +20,22 @@ body::after{
     background-color: rgba(143, 0, 0, 0.9) !important; /* Adjust opacity here for the overlay effect */
     z-index: -1; /* Keeps the overlay behind the content */
 }
+/* scrollbar */
+::-webkit-scrollbar{
+    cursor: pointer;
+    width: 2px;
+}
+
+::-webkit-scrollbar-track{
+    cursor: pointer;
+    background: #555;
+}
+
+::-webkit-scrollbar-thumb{
+    background: 0#121212;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#242424;
+}
