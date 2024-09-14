@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import useLogin from '../../hooks/useLogin'
 
 const Login = () => {
+
+    const [username,setUsername]=useState()
+    const [password,setPassword]=useState()
+
+    const {login}=useLogin()
+
+    const handleSubmit=async(e)=>{
+        e.preventDefault();
+        await login({username,password})
+    }
+
 
   return (
     <div className='flex flex-col items-center justify-center mini-w-96 mx-auto'>
@@ -9,18 +21,18 @@ const Login = () => {
             <h1 className='text-3xl font-semibold text-center text-gray-300'>Login 
                 <span className='text-yellow-300'> GlimerTalk</span>
             </h1>
-            <form >
+            <form  onSubmit={handleSubmit}>
                 <div>
                     <label className='label p-2'>
                         <span className='text-base label-text'>Username</span>
                     </label>
-                    <input type="text" placeholder='Enter username' className='w-full input input-bordered h-10'/>
+                    <input type="text" placeholder='Enter username' value={username} onChange={(e)=>setUsername(e.target.value)} className='w-full input input-bordered h-10'/>
                 </div>
                 <div>
                     <label className='label p-2'>
                         <span className='text-base label-text'>Password</span>
                     </label>
-                    <input type="password" placeholder='Enter password' className='w-full input input-bordered h-10'/>
+                    <input type="password" placeholder='Enter password' value={password} onChange={(e)=>setPassword(e.target.value)} className='w-full input input-bordered h-10'/>
                 </div>
                 <Link to="http://localhost:3003/signup" className='text-sm hover:underline hover:text-blue-600'> 
                     {"Don't"} have an account

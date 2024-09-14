@@ -2,8 +2,6 @@ import bcryptjs from "bcryptjs";
 import userModel from "../models/user.model.js";
 import generateTokenAndSetCookie from "../utils/generateToken.utils.js";
 
-
-
 const signupController = async (req, res) => {
     try {
         const { fullName, username, password, confirmPassword, gender } = req.body;
@@ -69,13 +67,13 @@ const loginController=async(req,res)=>{
 
         // check both are correct 
         if(!user || !checkPassword){
-            return res.status(400).json({error:"Invalid credentials"})
+            return res.json({'failMessage':"Invalid credentials"})
         }
         generateTokenAndSetCookie(user._id,res)
         res.status(200).json({"user":user})     
     } catch (error) {
         console.log(error)
-        res.status(500).json({"error":"Internal Server error"})
+        res.status(500).json({"failMessage":"Internal Server error"})
     }
 
 }
@@ -86,7 +84,7 @@ const logoutController=async(req,res)=>{
         
     } catch (error) {
         console.log("Error in log out",error.message)
-        res.status(500).json({"error":"Internal Server Error"})
+        res.status(500).json({error:"Internal Server Error"})
     }
 }
 

@@ -1,3 +1,12 @@
+-------------------------BUGS----------------------------------------------
+
+-> Cookie is not storing in local browerse but storing in the postman
+-> If cookie is not storing how the server is able to understand the loggedin user 
+-> Why it is only showing error in the userController
+-> 
+
+
+
 using custom hooks --------------------------
 1> Crete a component like a normal component .
 2> Instead of JSX write the functions you want to carry out on the comonent.
@@ -25,6 +34,18 @@ export const AuthContextProvider=({children})=>{
 }
 
 5> wrap the App compont from <AuthContextProvider> in main.JSX
+ <AuthContextProvider>
+      <App />
+  </AuthContextProvider>,
+
+6> consume the values
+import React, { useContext } from 'react';
+import { AuthContext } from './AuthContext';
+// import the instance of createContext
+
+const {authContext}=useContext(AuthContext)
+const {method, or state you want to fecth} = useContext(name of the instance from where you want to fetch)
+   
 
 
 
@@ -96,8 +117,40 @@ console.log('After');
 
 fetch("url").then(()=>{}).catch("").finally()
 
+fetch("https://api.example.com/data")
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json(); // Parse the JSON from the response
+  })
+  .then(data => {
+    console.log("Data fetched successfully:", data);
+    // Handle the data (e.g., update UI or state)
+  })
+  .catch(error => {
+    console.error("Error fetching data:", error);
+    // Handle any errors that occur during fetch
+  })
+  .finally(() => {
+    console.log("Fetch operation completed.");
+    // Perform any cleanup or final actions
+  });
 
 
 
+------------------------------------------------ Saving user data in the localstorage ---------------------------
+
+
+const [authUser,setAuthUser]=useState(JSON.parse(localStorage.getItem("chat-user")) || null)
+
+
+
+--------------------------------------- componentDidunmount() ------------------------------------------------
+
+  useEffect(()=>{
+
+    return ()=>setSelectedConversation(null)
+  })
 
 

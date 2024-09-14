@@ -1,28 +1,27 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import toast from 'react-hot-toast'
 import axios from 'axios'
+import { AuthContext } from '../context/AuthContext'
 
 const useSignup = () => {
+
+  //getting the value of contextAPI
+  const {setAuthUser,authUser}=useContext(AuthContext)
   const [loading,setLoading]=useState(false)
 
   const signup=async({fullName,username,password,confirmPassword,gender})=>{
 
     // checking the input field on the client side
     const success=handleInputErrors({fullName,username,password,confirmPassword,gender})
-    if(!success){
-      return -1;
-    };
+    if(!success)return ;
 
     setLoading(true)
     try {
 
       const res=await axios.post('http://localhost:5001/api/auth/signup',({fullName,username,password,confirmPassword,gender}))
       const data=res.data
-      console.log(res.data)
-      console.log(res.data.error)
 
       if(res.data.error){
-        console.log(res.data.error)
         toast.error(res.data.error)
       }
       if(res.data.message){
@@ -30,7 +29,10 @@ const useSignup = () => {
       }
 
       //localstorage
+      localStorage.setItem("chat-user",JSON.stringify(data))
+
       //context
+      setAuthUser(data)
 
     } catch (error) {
       toast.error(error.message)

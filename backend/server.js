@@ -5,6 +5,7 @@ import { connectDB } from './config/connectDB.config.js'
 import cors from 'cors'
 import messageRouter from './routes/message.routes.js'
 import cookieParser from 'cookie-parser'
+import userRouter from './routes/user.routes.js'
 // variables
 const app=express()
 const PORT=process.env.PORT
@@ -21,7 +22,7 @@ app.use('/api/auth',authRouter)
 
 app.use('/api/messages', messageRouter)
 
-app.use('/api/users', messageRouter)
+app.use('/api/users', userRouter)
 
 app.get('/',(req,res)=>{
     res.send("Hello Jarvis")

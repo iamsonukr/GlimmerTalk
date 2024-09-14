@@ -5,6 +5,7 @@ import useSignup from '../../hooks/useSignup'
 
 const Signup = () => {
 
+    // define variables
     const [input,setInputs]=useState({
         fullName:'',
         username:'',
@@ -12,7 +13,10 @@ const Signup = () => {
         confirmPassword:'',
         gender:'',
     })
+    // importing custom hooks
     const {loading, signup}=useSignup()
+
+    // onChange functions
     const onChangeHandler=(e)=>{
         e.preventDefault();
         let name=e.target.name;
@@ -20,6 +24,7 @@ const Signup = () => {
         setInputs({...input,[name]:value})
     }
 
+    // form submit function
     const handleSubmit=async(e)=>{
         e.preventDefault()
         await signup(input)
@@ -67,8 +72,8 @@ const Signup = () => {
                 <Link to="http://localhost:3003/login" className='text-sm hover:underline hover:text-blue-600'> 
                     Already have an account? 
                 </Link>
-                <button className='btn btn-block btn-sm mt-2 border border-slate-700'>
-                    Signup
+                <button className='btn btn-block btn-sm mt-2 border border-slate-700' disabled={loading}>
+                    {loading?<span className='loading loading-infinity'></span>:"Sign Up"}
                 </button>
             </form>
         </div>

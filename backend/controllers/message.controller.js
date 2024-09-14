@@ -6,9 +6,10 @@ const sendMessage=async(req,res)=>{
 
         //1> user is decoded from the token in the protectedMiddleware 
         const senderId=req.user._id
-
+        
         //receiverId is already in the params
         const {id:receiverId}=req.params
+        console.log("this is seerver",senderId,receiverId   )
 
         // message is coming from the req.body
         const {message}=req.body
