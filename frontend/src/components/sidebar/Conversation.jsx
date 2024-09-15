@@ -7,10 +7,6 @@ import { getRandomEmoji } from '../../utils/emoji'
 const Conversation = () => {
   const { loading, conversation } = useGetConversation()
 
-  useEffect(() => {
-    console.log("Conversation in component:", conversation);
-  }, [conversation]);
-
   return (
     <div className='py-2 flex flex-col overflow-auto'>
       {conversation.map((conversation,idx)=>(

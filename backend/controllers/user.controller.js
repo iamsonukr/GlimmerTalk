@@ -4,9 +4,11 @@ import userModel from "../models/user.model.js"
 
 const getUsersForSidebar=async(req,res)=>{
     try {
-        // const loggedInUserId=req.user._id
-        const filterdUsers=await userModel.find({})
-        res.status(200).json(filterdUsers)
+        const loggedInUserId = req.user._id;
+        const filteredUsers = await userModel.find({
+            _id: { $ne: loggedInUserId }
+        });
+        res.status(200).json(filteredUsers)
         
     } catch (error) {
         console.log(error)

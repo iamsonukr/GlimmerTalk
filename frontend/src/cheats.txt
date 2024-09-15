@@ -3,7 +3,24 @@
 -> Cookie is not storing in local browerse but storing in the postman
 -> If cookie is not storing how the server is able to understand the loggedin user 
 -> Why it is only showing error in the userController
--> 
+
+SOLVED
+
+for storing cookies you need these
+
+----1>
+
+server.js
+app.use(cors({
+    origin:'http://localhost:3003',
+    credentials:true
+}))
+
+----2>
+
+and any making any request from client side 
+{withCredentials:true} 
+include this in the parameter after body
 
 
 

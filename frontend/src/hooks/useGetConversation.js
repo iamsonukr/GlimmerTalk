@@ -10,7 +10,7 @@ const useGetConversation = () => {
         const getConversation = async () => {
             setLoading(true);
             try {
-                const res = await axios.get('http://localhost:5001/api/users');
+                const res = await axios.get('http://localhost:5001/api/users',{withCredentials:true});
                 
                 setConversations(res.data); // Set the data
             } catch (error) {

@@ -7,8 +7,6 @@ import { TiMessages } from 'react-icons/ti'; // Make sure to import the icon
 const MessageContainer = () => {
   const { selectedConversation } = useConversation(); // Destructured `setSelectedConversation` was unused
   
-  console.log("this is", selectedConversation);
-
   return (
     <>
       {!selectedConversation ? (

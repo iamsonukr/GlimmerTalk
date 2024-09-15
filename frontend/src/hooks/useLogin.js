@@ -14,7 +14,7 @@ const useLogin = () => {
         setLoading(true)
         console.log(username,password)
         try {
-            const res=await axios.post('http://localhost:5001/api/auth/login',({username,password}))
+            const res=await axios.post('http://localhost:5001/api/auth/login',{username,password},{withCredentials:true})
             const data=res.data
     
             if(res.data.failMessage){

@@ -1,7 +1,7 @@
 import bcryptjs from "bcryptjs";
 import userModel from "../models/user.model.js";
 import generateTokenAndSetCookie from "../utils/generateToken.utils.js";
-
+import jwt from 'jsonwebtoken'
 const signupController = async (req, res) => {
     try {
         const { fullName, username, password, confirmPassword, gender } = req.body;
@@ -62,6 +62,7 @@ const loginController=async(req,res)=>{
 
         //find the user 
         const user=await userModel.findOne({username})
+
         // check password
         const checkPassword=await bcryptjs.compare(password,user?.password || "")
 
@@ -69,8 +70,13 @@ const loginController=async(req,res)=>{
         if(!user || !checkPassword){
             return res.json({'failMessage':"Invalid credentials"})
         }
-        generateTokenAndSetCookie(user._id,res)
-        res.status(200).json({"user":user})     
+        const userId = user._id   
+
+        // storing the data in cookie
+        
+        generateTokenAndSetCookie(userId, res)
+        res.status(200).json({"user":user})   
+       
     } catch (error) {
         console.log(error)
         res.status(500).json({"failMessage":"Internal Server error"})
