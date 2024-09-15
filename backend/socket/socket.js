@@ -1,32 +1,37 @@
-import {Server} from 'socket.io'
-import http from 'http'
-import express from 'express'
+import { Server } from 'socket.io';
+import http from 'http';
+import express from 'express';
 
-const app=express()
-const server =http.createServer(app)
+const app = express();
+const server = http.createServer(app);
 
-const io=new Server(server,{
-    cors:{
-        origin:["http://localhost:3003"],
-        methods:["GET","POST"],
-    }
-})
+const io = new Server(server, {
+  cors: {
+    origin: ["http://localhost:3003"],
+    methods: ["GET", "POST"],
+  },
+});
 
-const userSocketMap={}, //{ userId:socketId}
- 
-// socket.on is used to listen to events. can be used both on client and server side
-io.on("connection",(socket)=>{
-    console.log("a user connected",socket.id)
+const userSocketMap = {}; // { userId: socketId }
 
-    const userId=socket.handshake.query.userId;
-    if(userId != "undefined")userSocketMap[userId]=socket.id;
+export const getReceiverSocketId = (receiverID)=>{
+  return userSocketMap[receiverID];
+}
 
-    io.emit("getOnlineUsers",Object.keys(userSocketMap))
+// socket.on is used to listen to events, can be used both on client and server side
+io.on("connection", (socket) => {
+  console.log("a user connected", socket.id);
 
-    socket.on("disconnect",()=>{
-        console.log("user disconnected",socket.io )
-        delete userSocketMap[userId];
-        io.emit("getOnlineUsers",Object.keys(userSocketMap))
-    })
-})
-export {app,server,io}
+  const userId = socket.handshake.query.userId;
+  if (userId !== "undefined") userSocketMap[userId] = socket.id;
+
+  io.emit("getOnlineUsers", Object.keys(userSocketMap));
+
+  socket.on("disconnect", () => {
+    console.log("user disconnected", socket.id); // Corrected this line
+    delete userSocketMap[userId];
+    io.emit("getOnlineUsers", Object.keys(userSocketMap));
+  });
+});
+
+export { app, server, io };
