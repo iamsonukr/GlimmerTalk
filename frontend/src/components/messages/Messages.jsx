@@ -13,7 +13,7 @@ const Messages = () => {
     setTimeout(()=>{
       lastMessageRef.current?.scrollIntoView({beahvior:"smooth"})
 
-    },100)
+    },10000)
   },[messages])
 
 
