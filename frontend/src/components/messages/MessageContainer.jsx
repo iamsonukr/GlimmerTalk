@@ -19,7 +19,6 @@ const MessageContainer = () => {
             <span className="label-text">To: </span>
             <span className="label-text">{selectedConversation.fullName || ''}</span>
           </div>
-
           {/* Messages */}
           <Messages />
 

@@ -1,7 +1,7 @@
 running dotenv.-----------------
 1> npm i dotenv
 2> import 'dotenv/config' //server.js
-3> file .env
+3> create file > .env in the backend folder
 4> process.env.variableName
 
 ----------------COOKIE FIXED -------------\

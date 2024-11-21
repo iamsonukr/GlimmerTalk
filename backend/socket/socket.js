@@ -4,10 +4,9 @@ import express from 'express';
 
 const app = express();
 const server = http.createServer(app);
-
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3003"],
+    origin: ["http://localhost:5002"],
     methods: ["GET", "POST"],
   },
 });
@@ -34,6 +33,16 @@ io.on("connection", (socket) => {
 
   // Emit the list of online users
   io.emit("getOnlineUsers", Object.keys(userSocketMap));
+
+  // Handle sending a new message
+  socket.on("sendMessage", (messageData) => {
+    const receiverSocketId = getReceiverSocketId(messageData.receiverId);
+    
+    if (receiverSocketId) {
+      // Emit the message directly to the receiver
+      io.to(receiverSocketId).emit("newMessage", messageData);
+    }
+  });
 
   // Handle user disconnection
   socket.on("disconnect", () => {
