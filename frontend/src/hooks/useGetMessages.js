@@ -20,7 +20,7 @@ const useGetMessages = () => {
           throw new Error('No conversation selected');
         }
 
-        const res = await axios.get(`http://localhost:5001/api/messages/${selectedConversation._id}`, { 
+        const res = await axios.get(`${url}/api/messages/${selectedConversation._id}`, { 
           withCredentials: true,
           // Add timeout to handle potential network issues
           timeout: 10000  

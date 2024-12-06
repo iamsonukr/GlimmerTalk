@@ -20,6 +20,8 @@ export const SocketContextProvider = ({ children }) => {
   const { authUser } = useContext(AuthContext);
   const socketRef = useRef(null);
 
+  let url="http://localhost:5001"
+
   useEffect(() => {
     // Cleanup function to ensure socket is properly closed
     const cleanupSocket = (socketInstance) => {
@@ -35,7 +37,7 @@ export const SocketContextProvider = ({ children }) => {
     // Only attempt socket connection if authenticated
     if (authUser && !socketRef.current) {
       try {
-        const newSocket = io("http://localhost:5001", {
+        const newSocket = io(`${url}`, {
           query: { userId: authUser._id },
           reconnection: true,
           reconnectionAttempts: 5,
@@ -105,7 +107,8 @@ export const SocketContextProvider = ({ children }) => {
       value={{ 
         socket: socketRef.current, 
         onlineUsers, 
-        isConnected 
+        isConnected,
+        url
       }}
     >
       {children}

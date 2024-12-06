@@ -18,7 +18,7 @@ const useSignup = () => {
     setLoading(true)
     try {
 
-      const res=await axios.post('http://localhost:5001/api/auth/signup',({fullName,username,password,confirmPassword,gender}))
+      const res=await axios.post(`${url}/api/auth/signup`,({fullName,username,password,confirmPassword,gender}))
       const data=res.data
 
       if(res.data.error){
